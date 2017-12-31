@@ -131,7 +131,6 @@ export default class CountryPicker extends Component {
       .map(c => c[0])
 
     this.state = {
-      modalVisible: false,
       cca2List: countryList,
       dataSource: ds.cloneWithRows(countryList),
       filter: '',
@@ -181,8 +180,8 @@ export default class CountryPicker extends Component {
   }
 
   onSelectCountry(cca2) {
+    this.props.onToggleModal(false)
     this.setState({
-      modalVisible: false,
       filter: '',
       dataSource: ds.cloneWithRows(this.state.cca2List)
     })
@@ -196,8 +195,8 @@ export default class CountryPicker extends Component {
   }
 
   onClose() {
+    this.props.onToggleModal(false)
     this.setState({
-      modalVisible: false,
       filter: '',
       dataSource: ds.cloneWithRows(this.state.cca2List)
     })
@@ -236,7 +235,7 @@ export default class CountryPicker extends Component {
   listHeight = countries.length * this.itemHeight
 
   openModal() {
-    this.setState({ modalVisible: true })
+    this.props.onToggleModal(false)
   }
 
   scrollTo(letter) {
@@ -311,11 +310,12 @@ export default class CountryPicker extends Component {
   }
 
   render() {
+    const { modalVisible, onToggleModal } = this.props
     return (
       <View>
         <TouchableOpacity
           disabled={this.props.disabled}
-          onPress={() => this.setState({ modalVisible: true })}
+          onPress={onToggleModal}
           activeOpacity={0.7}
         >
           {this.props.children ? (
@@ -331,8 +331,8 @@ export default class CountryPicker extends Component {
         <Modal
           transparent={this.props.transparent}
           animationType={this.props.animationType}
-          visible={this.state.modalVisible}
-          onRequestClose={() => this.setState({ modalVisible: false })}
+          visible={modalVisible}
+          onRequestClose={() => onToggleModal(false)}
         >
           <View style={styles.modalContainer}>
             <View style={styles.header}>
