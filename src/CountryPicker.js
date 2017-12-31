@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 import {
   StyleSheet,
+  SafeAreaView,
   View,
   Image,
   TouchableOpacity,
@@ -310,17 +311,15 @@ export default class CountryPicker extends Component {
   }
 
   render() {
-    const { modalVisible, onToggleModal } = this.props
+    const { modalVisible, onToggleModal, disabled, children, transparent, animationType, modalStyles } = this.props
     return (
       <View>
         <TouchableOpacity
-          disabled={this.props.disabled}
+          disabled={disabled}
           onPress={onToggleModal}
           activeOpacity={0.7}
         >
-          {this.props.children ? (
-            this.props.children
-          ) : (
+          {children ? children : (
             <View
               style={[styles.touchFlag, { marginTop: isEmojiable ? 0 : 5 }]}
             >
@@ -329,12 +328,12 @@ export default class CountryPicker extends Component {
           )}
         </TouchableOpacity>
         <Modal
-          transparent={this.props.transparent}
-          animationType={this.props.animationType}
+          transparent={transparent}
+          animationType={animationType}
           visible={modalVisible}
           onRequestClose={() => onToggleModal(false)}
         >
-          <View style={styles.modalContainer}>
+          <View style={[styles.modalContainer, modalStyles]}>
             <View style={styles.header}>
               {this.props.closeable && (
                 <CloseButton

@@ -1,28 +1,25 @@
 import { Platform, StyleSheet, PixelRatio } from 'react-native'
 import { getHeightPercent } from './ratio'
 
+const isIos = Platform.OS === 'ios'
+
 export default StyleSheet.create({
   modalContainer: {
-    backgroundColor: 'white',
     flex: 1
   },
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white'
   },
   header: {
-    marginTop: Platform.OS === 'ios' ? 16 : 0,
+    marginTop: isIos ? 30 : 0,
     flexDirection: 'row',
     alignItems: 'center'
   },
   input: {
-    height: 48,
-    width: '70%'
-  },
-  inputOnly: {
-    marginLeft: '15%'
+    paddingLeft: 15,
+    height: 50,
   },
   touchFlag: {
     alignItems: 'center',
