@@ -20,6 +20,7 @@ export default StyleSheet.create({
   input: {
     paddingLeft: 15,
     height: 50,
+    fontSize: getHeightPercent(2.2)
   },
   touchFlag: {
     alignItems: 'center',
